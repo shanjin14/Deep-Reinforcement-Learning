@@ -14,7 +14,7 @@ Parameter used as follows:
 
 
 ### Plots of rewards
-![](Reward%20chart.png)
+![Plotted Rewards](https://github.com/shanjin14/Deep-Reinforcement-Learning/blob/main/P1_CollectBanana/Reward%20Chart.png)
 
 ### Ideas for Future Work
 There are several directions that we can further refine the RL agent performance.
