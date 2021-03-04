@@ -11,7 +11,7 @@ The project is to collect banana in a 3D unity environment.
     - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
     - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
  
-2. Run the navigation.ipynb
+2. Run the navigation.ipynb to train the RL agent
 
 
 #### Additional notes
