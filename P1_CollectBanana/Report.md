@@ -14,7 +14,7 @@ Parameter used as follows:
 
 
 ### Plots of rewards
-![](Training chart.png?raw=true)
+![](Training%20chart.png?raw=true)
 
 ### Ideas for Future Work
 There are several directions that we can further refine the RL agent performance.
