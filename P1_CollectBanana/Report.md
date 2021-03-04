@@ -23,3 +23,5 @@ There are several directions that we can further refine the RL agent performance
 3. hyperparameter tuning - there are a total 6 hyperparameters in the RL agent. We can see any of the hyperparameters can help the learning
 
 
+### Reference
+1. Most code is referencing the base sample provided by Udacity Deep Reinforcement Learning Github(https://github.com/udacity/deep-reinforcement-learning)
