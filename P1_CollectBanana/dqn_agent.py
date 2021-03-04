@@ -74,7 +74,22 @@ class Agent():
             return np.argmax(action_values.cpu().data.numpy())
         else:
             return random.choice(np.arange(self.action_size))
+    def predict_value(self):
+        """
+        TO understand the pytorch capability
+        """
+        experiences = self.memory.sample()
+        states, actions, rewards, next_states, dones = experiences
+        print(self.qnetwork_target(next_states).detach())
+        print(self.qnetwork_target(next_states).detach().max(1))
+        print(self.qnetwork_target(next_states).detach().max(1)[0].unsqueeze(1))
+        
 
+
+        # Get expected Q values from local model
+        print(self.qnetwork_local(states))
+        print(self.qnetwork_local(states).gather(1, actions))
+    
     def learn(self, experiences, gamma):
         """Update value parameters using given batch of experience tuples.
 
@@ -85,22 +100,21 @@ class Agent():
         """
         states, actions, rewards, next_states, dones = experiences
 
-        ## TODO: compute and minimize the loss
-        "*** YOUR CODE HERE ***"
+        # Get max predicted Q values (for next states) from target model
         Q_targets_next = self.qnetwork_target(next_states).detach().max(1)[0].unsqueeze(1)
+
         # Compute Q targets for current states 
         Q_targets = rewards + (gamma * Q_targets_next * (1 - dones))
-        
+
         # Get expected Q values from local model
         Q_expected = self.qnetwork_local(states).gather(1, actions)
-        print(Q_expected)
+
         # Compute loss
         loss = F.mse_loss(Q_expected, Q_targets)
         # Minimize the loss
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
-
 
         # ------------------- update target network ------------------- #
         self.soft_update(self.qnetwork_local, self.qnetwork_target, TAU)                     
