@@ -13,3 +13,6 @@ The project is to collect banana in a 3D unity environment.
  
 2. Run the navigation.ipynb
 
+
+#### Additional notes
+1. Checkpoint.pth is the saved weight from the training
