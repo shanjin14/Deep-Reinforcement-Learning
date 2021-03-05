@@ -63,6 +63,7 @@ Parameter used as follows:
 
 ### Plots of rewards
 ![Plotted Rewards](https://github.com/shanjin14/Deep-Reinforcement-Learning/blob/main/P1_CollectBanana/Reward%20Chart.png)
+
 The agent takes only 433 episodes to reach +13 rewards.
 
 ### Ideas for Future Work
