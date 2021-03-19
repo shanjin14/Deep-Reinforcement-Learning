@@ -2,38 +2,59 @@
 
 ### Learning Algorithm
 The learning algorithm used in this project is DDPG (Deep Deterministic Policy Gradient)
+It is used for continuous state space  and continuous action space like the project 2 environment
 
 #### DDPG Introduction
-DDPG 
+DDPG map continuous state space to generate policy for continuous action space. In this project it means the torque value of 2 joints (total 4 continuous value in single vector)
+The design of DDPG consists of 2 sets of neural network
+actor neural network: it map state space to action space (33 --> 4 ). We apply tanh to the last layer which generate value between -1 and 1 for 4 values in single vector
+critic neural network: it map state-action pair input to Q(s,a) value ( (33 + 4)  --> 1 )
+
+The step goes this way:
+1. Agent use action neural network to generate an action
+2. Agent receive feedback(reward, next_step, done) from the environment
+3. add them into replay buffer
+4. After the replay buffer has sufficient samples, Agent sample a subset of experience and learn from it by:
+  a. Given the next step, update the critic neural network
+  b. Generate action based on current state using actor neural network
+  c. get Q expected from critic neural network given current state and action from actor neural network
+  d. actor loss = - Q expected above (i.e we want to update the weight to maximize the Q expected).A good discussion reference [here] (https://www.quora.com/Why-is-the-loss-for-DDPG-Actor-the-product-of-gradients-of-Q-values-actions)
+  e. update the weight of the actor critic network
+
+To stabilise the learning above, we used the same technique we have seen in double dqn -- target network. 
+Hence, you will need to have:
+1. actor_local  - use in step #1, #4b, #4e(update critic local weight)
+2. actor_target - use in step #4a
+3. critic_local - use in step #4c
+4. critic_target - use in step #4a to calculate Q expected for update critic local
+
 
 
 ##### key changes added to achieve the 30 scores
+In the first implementation, I was not able to achieve 30 scores after more than few hundreds episodes. In fact, the agent does not learn anything.
+After going through again the material from DRLND, below are the key changes made that I think that make it work:
+1. gradient clipping -- we used gradient norm clipping. which rescale the weight update vector size to 1 to limit the exploding gradient that leads to bad learning
+3. instead of update target network every 10 steps, update every 20 steps. it improves the stability of the learning
+4. decay of the noise -- noise is added at the start of the learning and gradually reduced (less exploration and more exploitation). It helps the stability of the learning
+ 
 
-
-##### Neural Network for State Value Function Approximation
-The input of the neural network (the "x") is 37 states. The output of the neural network (the "y") is the value of each action (a total of 4 action for each state)
-In summary, we take the input of each state and provide an estimated Q value for each action (Q(s,a) just like Q learning/SARSA)
-TL;DR - we have 37 state as "x" and 4 Q value as "y"
 
 ###### The model architecture
-Input layer      (37 weights): 37 inputs
-1st hidden layer (64 weights): 37 inputs --> 64 outputs  . apply ReLU(Rectified Linear Unit) activation fucntion on the 1st hidden layer output
-
-2nd hidden layer (64 weights): 64 inputs --> 64 outputs .  apply ReLU(Rectified Linear Unit) activation fucntion on the 2nd hidden layer output
-output layer     (4 weights) : 64 output --> 4 weights 
-
-
-
+xxxx
 
 
 #### Hyperparameters 
 Parameter used as follows:
-1. BUFFER_SIZE = 10,000  # replay buffer size
-2. BATCH_SIZE = 64         # minibatch size
-3. GAMMA = 0.99            # discount factor
-4. TAU = 0.001             # for soft update of target parameters
-5. Learning Rate = 0.0005              # learning rate 
-6. UPDATE_EVERY = 4        # how often to update the network
+BUFFER_SIZE = int(1e5)  # replay buffer size
+BATCH_SIZE = 128        # minibatch size
+GAMMA = 0.99            # discount factor
+TAU = 1e-3              # for soft update of target parameters
+LR_ACTOR = 1e-3         # learning rate of the actor 
+LR_CRITIC = 1e-3        # learning rate of the critic
+WEIGHT_DECAY = 0  # L2 weight decay
+UPDATE_FREQ = 20       # how often to update the network
+EPSILON = 1.0
+EPSILON_DECAY = 0.000001
 
 
 ### Plots of rewards
