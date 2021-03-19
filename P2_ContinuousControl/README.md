@@ -13,15 +13,15 @@ Below is a video illustration of the Banana Collectors Environment
 We will be solving the 1 reacher environment.
 
 ##### Action space
-THe action space is also continuous. There are total 4 parameters define the action space
+THe action space is also continuous. There are total 4 parameters define the action space representing the torque input value of the 2 joints
 
 ##### Algorithm
-Given a continue state space and action space, we will be using DDPG algorithm in this project
+Given it's continuous state space and continous action space, we will be using DDPG algorithm in this project
 
 
 ##### Rewards
 In this project, the agent need to collect a rewards of more than 30 to consider the task is solved.
-a reward of +1 is associated with every yellow banana collected, while a reward of -1 is given for any purple banana.
+A reward of +0.1 is provided for each step that the agent's hand is in the goal location.
 
 #### Instructions
 1. Download the environment from here
