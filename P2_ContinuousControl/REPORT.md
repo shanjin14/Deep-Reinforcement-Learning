@@ -72,6 +72,10 @@ EPSILON_DECAY = 0.000001
 
 The agent takes only 169 episodes to reach +30 rewards.
 
+![Plotted Rewards after the agent is trained](https://github.com/shanjin14/Deep-Reinforcement-Learning/blob/main/P2_ContinuousControl/avg_reward_trained.png)
+
+The agent is able to achieve 30 rewards quite consistently after trained
+
 ### Ideas for Future Work
 There are several directions that we can further refine the RL agent performance.
 1. prioritised experience replay
