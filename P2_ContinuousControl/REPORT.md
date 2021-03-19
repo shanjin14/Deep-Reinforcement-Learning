@@ -10,7 +10,7 @@ The design of DDPG consists of 2 sets of neural network
 actor neural network: it map state space to action space (33 --> 4 ). We apply tanh to the last layer which generate value between -1 and 1 for 4 values in single vector
 critic neural network: it map state-action pair input to Q(s,a) value ( (33 + 4)  --> 1 )
 
-The step goes this way:
+##### The step goes this way:
 1. Agent use action neural network to generate an action
 2. Agent receive feedback(reward, next_step, done) from the environment
 3. add them into replay buffer
@@ -40,7 +40,17 @@ After going through again the material from DRLND, below are the key changes mad
 
 
 ###### The model architecture
-xxxx
+Actor neural network:
+1. fully connected layer 1 (state_size, 128) (state_size = 33) , follow by relu
+2. fully connected layer 2 (128, 128) follow by relu
+3. fully connected layer 3 (128, action_size) (action_size = 4) 
+4. tanh output layer convert fc3 output between -1 and 1
+
+Critic neural network
+1. fully connected layer 1 (state_size, 128) (state_size = 33) , follow by relu
+3. fully connected layer 2 (128 + action_size, 128) follow by relu
+4. fully connected layer 3 (128, 128) follow by relu
+6. fully connected output layer 4 map fc3 output to 1 value (Q(s,a))
 
 
 #### Hyperparameters 
@@ -58,15 +68,14 @@ EPSILON_DECAY = 0.000001
 
 
 ### Plots of rewards
-![Plotted Rewards](https://github.com/shanjin14/Deep-Reinforcement-Learning/blob/main/P1_CollectBanana/Reward%20Chart.png)
+![Plotted Rewards](https://github.com/shanjin14/Deep-Reinforcement-Learning/blob/main/P2_ContinuousControl/ddpg_avg_reward.png)
 
-The agent takes only 433 episodes to reach +13 rewards.
+The agent takes only 169 episodes to reach +30 rewards.
 
 ### Ideas for Future Work
 There are several directions that we can further refine the RL agent performance.
-1. neural network architecture - we could refine more hidden layer so that it can approximate the state value better
-2. prioritised experience replay - priortised experience replay could help the learning
-3. hyperparameter tuning - there are a total 6 hyperparameters in the RL agent. We can see any of the hyperparameters can help the learning
+1. prioritised experience replay
+2. D4PG / PPO - which we utilise 20 reacher environment to improve the learning
 
 
 ### Reference
