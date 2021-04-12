@@ -54,7 +54,7 @@ EPSILON_DECAY = 0.000001
 
 
 ### Plots of rewards
-![Plotted Rewards](https://github.com/shanjin14/Deep-Reinforcement-Learning/blob/main/P2_ContinuousControl/ddpg_avg_reward.png)
+![Plotted Rewards](https://github.com/shanjin14/Deep-Reinforcement-Learning/blob/main/P3_Tennis/DDPG_MAVariant.png)
 
 The agent takes only 403 episodes to reach +0.5 rewards.
 
