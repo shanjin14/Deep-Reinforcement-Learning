@@ -7,7 +7,7 @@ The project is to control the robotic arm to reach the target location in a 3D u
 There is a total of 33 parameters defining the state spaces,
 It is a continuous state space, hence we need to use a Neural Network to approximate the state space value.
 
-Below is a video illustration of the Banana Collectors Environment
+Below is a video illustration of the Continuous Control Environment
 [Continous Control](https://youtu.be/z4EDWYI723w)
 
 We will be solving the 1 reacher environment.
