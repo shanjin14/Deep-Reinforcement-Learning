@@ -8,13 +8,13 @@ It is used for continuous state space  and continuous action space same as what 
 DDPG map continuous state space to generate policy for continuous action space. In this project it means the torque value of 2 joints (total 4 continuous value in single vector)
 The single DDPG description can be found here [DDPG Introduction in Project 2](https://github.com/shanjin14/Deep-Reinforcement-Learning/blob/main/P2_ContinuousControl/REPORT.md)
 
-##### key changes to adapt to two agent scenario
-1. shared observation space - each agent has its own observation of 24 parameters. We combine them into a shared observation space of 48 parameters. i.e, each agent can see each other position, racket..etc. 
-	Essentially, it become a fully observable MDP problem
+##### key changes to adapt to two agents scenario
+1. State representation - The original state representation has 24 parameter. We added in an additional parameter to flag out which player does this observation come from, where 1 represent player 1, -1 represent player 2
+
 2. shared action, critic, replay buffer -- both agent share the same actor network, critic network, and replay buffer. so both agent are training the same brain to act in coordination.
-3. Batch Normalization in Action and Critic Network - I started with a 4-layer deep Neural Net. However, the agent does not learn anything. After introducing Batch Normalization, the agent is able to learn the policy. 
+
+3. Batch Normalization in Action and Critic Network - I started with a 4-layer deep Neural Net without Batch Normalization. However, the agent does not learn anything. After introducing Batch Normalization, the agent is able to learn the policy. 
 Batch Normalization is a technique to normalize the data for each mini batch. It seems to help stablize the learning by reducing the internal covariate shift per the paper[2]
-4. State representation - The original state representation has 24 parameter. We added in an additional parameter to flag out which player does this observation come from, where 1 represent player 1, -1 represent player 2
 
 
 
@@ -56,7 +56,7 @@ Parameter used as follows:
 ### Plots of rewards
 ![Plotted Rewards](https://github.com/shanjin14/Deep-Reinforcement-Learning/blob/main/P3_Tennis/DDPG_MAVariant.png)
 
-The agent takes only 403 episodes to reach +0.5 rewards.
+The agent takes only 619 episodes to reach +0.5 rewards.
 
 
 ### Ideas for Future Work
